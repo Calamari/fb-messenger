@@ -1,0 +1,16 @@
+<ion-view view-title="{{conversation.chatPartner.name}}">
+  <ion-nav-buttons side="secondary">
+  </ion-nav-buttons>
+
+  <ion-content class="padding">
+    <ion-refresher pulling-text="Pull to refresh…" on-refresh="loadOlder()"></ion-refresher>
+    <ion-list>
+      <div ng-repeat="message in conversation.messages" class="item item-avatar item-message" ng-class="{ 'message-from-me': message.fromMe }">
+        <img ng-src="{{message.author.imageUrl}}" style="width: 32px; height: 32px">
+        <h2>{{message.text}}</h2>
+        <p>{{message.createdAt}}</p>
+      </div>
+    </ion-list>
+    <ion-infinite-scroll ng-if="moreDataCanBeLoaded" icon="ion-loading-c" on-infinite="loadNewer()"></ion-infinite-scroll>
+  </ion-content>
+</ion-view>
